@@ -3,11 +3,9 @@ from tortoise import Tortoise
 from datetime import datetime
 import discord, asyncio
 import config, cogs
+from models import Bot
 import aiohttp
 import asyncpg
-
-intents = discord.Intents.default()
-intents.presences = True
 
 
 class Warden(commands.Bot):
@@ -16,7 +14,8 @@ class Warden(commands.Bot):
             command_prefix=("w.", "W."),
             strip_after_prefix=True,
             case_insensitive=True,
-            intents=intents,
+            intents=discord.Intents.all(),
+            chunk_guilds_at_startup=False,
             **kwargs,
         )
 
@@ -24,6 +23,7 @@ class Warden(commands.Bot):
         self.color = config.COLOR
         self.start_time = datetime.now()
         self.loop = asyncio.get_event_loop()
+        self.to_watch = set()
         asyncio.get_event_loop().run_until_complete(self.init_warden())
 
         for ext in cogs.loadable:
@@ -41,7 +41,8 @@ class Warden(commands.Bot):
             model.bot = self
 
     async def cache(self):
-        pass
+        for idx in await Bot.filter(watch=True):
+            self.to_watch.add(idx.bot_id)
 
     async def on_ready(self):
         print(f"Logged in as: {self.user}")
