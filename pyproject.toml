@@ -1,0 +1,22 @@
+[tool.poetry]
+name = "bot-warden"
+version = "0.1.0"
+description = ""
+authors = ["deadaf <askpygod@gmail.com>"]
+
+[tool.poetry.dependencies]
+python = "^3.8"
+"discord.py" = "^1.7.2"
+tortoise-orm = "^0.17.3"
+asyncpg = "^0.23.0"
+jishaku = "^1.20.0"
+
+[tool.poetry.dev-dependencies]
+black = {version = "^21.5b1", allow-prereleases = true}
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.black]
+line-length = 122
