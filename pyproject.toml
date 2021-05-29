@@ -10,6 +10,7 @@ python = "^3.8"
 tortoise-orm = "^0.17.3"
 asyncpg = "^0.23.0"
 jishaku = "^1.20.0"
+humanize = "^3.6.0"
 
 [tool.poetry.dev-dependencies]
 black = {version = "^21.5b1", allow-prereleases = true}

@@ -6,6 +6,12 @@ import config, cogs
 from models import Bot
 import aiohttp
 import asyncpg
+import os
+
+
+os.environ["JISHAKU_HIDE"] = "True"
+os.environ["JISHAKU_NO_UNDERSCORE"] = "True"
+os.environ["JISHAKU_NO_DM_TRACEBACK"] = "True"
 
 
 class Warden(commands.Bot):

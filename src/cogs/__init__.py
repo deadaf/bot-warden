@@ -1,1 +1,1 @@
-loadable = ("jishaku",)
+loadable = ("jishaku", "cogs.events")
