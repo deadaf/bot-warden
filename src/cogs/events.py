@@ -11,11 +11,14 @@ class Events(commands.Cog):
 
     @commands.Cog.listener()
     async def on_member_update(self, before, after):
+
         if before.status == after.status:
             return
 
         if not before.bot or not before.id in self.bot.to_watch:
             return
+
+        print("on_member_update")
 
         if after.status.value == "offline":
             await Bot.filter(bot_id=after.id).update(off_time=datetime.now())
@@ -27,6 +30,7 @@ class Events(commands.Cog):
 
     @commands.Cog.listener()
     async def on_log(self, user):
+        print("listener")
         record = await Bot.get(bot_id=user.id)
 
         logschan = self.bot.get_channel(record.log_channel_id) or await self.bot.fetch_channel(record.log_channel_id)
